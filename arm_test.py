@@ -60,19 +60,7 @@ def arm():
         time.sleep(1)
 
     print("Vehicle is now armed.")
-
-def takeoff():
-    targetAlt = float(args.alt)
-    vehicle.simple_takeoff(targetAlt)
-
-    while True:
-        currAlt = vehicle.location.global_relative_frame.alt
-        print("Altitude = ", currAlt)
-        if currAlt >= 0.95*targetAlt:
-            print("Reached target altitude")
-            break
-        time.sleep(0.5)
-
+    
 def disarm():
     print("Disarming vehicle, dumping vehicle state")
     vehicle.armed = False
@@ -93,12 +81,6 @@ vehicle = connectMyCopter()
 # Run flight plan
 arm()
 time.sleep(5)
-takeoff()
-time.sleep(5)
-
-# Return to launch
-print("Returning to Launch")
-vehicle.mode = VehicleMode("RTL")
 
 # Disarm
 disarm()
