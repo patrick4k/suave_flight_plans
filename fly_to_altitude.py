@@ -8,7 +8,8 @@ import argparse
 # notes
 """
 - Copter 3.2.1 needs manual mode switch to GUIDED
-- Copter 3.3 can take off in AUTO, provided the mission has a MAV_CMD_NAV_TAKEOFF. the mission will not start until you explicity send MAV_CMD_MISSION_START message.
+- Copter 3.3 can take off in AUTO, provided the mission has a MAV_CMD_NAV_TAKEOFF. 
+  the mission will not start until you explicity send MAV_CMD_MISSION_START message.
 """
 
 ## HOW TO USE
@@ -59,3 +60,4 @@ vehicle = connectMyCopter()
 arm()
 takeoff()
 print("End of flight plan")
+vehicle.close()
