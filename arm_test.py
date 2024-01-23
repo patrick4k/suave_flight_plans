@@ -60,7 +60,7 @@ def arm():
         time.sleep(1)
 
     print("Vehicle is now armed.")
-    
+
 def disarm():
     print("Disarming vehicle, dumping vehicle state")
     vehicle.armed = False
@@ -72,7 +72,6 @@ def disarm():
 # Parse arguments
 parser = argparse.ArgumentParser(description='commands')
 parser.add_argument('--connect')
-parser.add_argument('--alt')
 args = parser.parse_args()
 
 # Connect to copter
