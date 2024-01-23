@@ -42,7 +42,6 @@ def connectMyCopter():
     baud_rate = 57600
     vehicle = connect(connection_string, baud=baud_rate, wait_ready=True)
     print("Vehicle connected, dumping vehicle state")
-    debugDump()
     return vehicle
 
 def arm():
@@ -76,6 +75,9 @@ args = parser.parse_args()
 
 # Connect to copter
 vehicle = connectMyCopter()
+
+# dump inital state
+debugDump()
 
 # Run flight plan
 arm()
