@@ -1,17 +1,23 @@
-from dronekit import connect, VehicleMode, LocationGlobalRelative, APIException
+from __future__ import print_function
+
+from dronekit import connect, VehicleMode, LocationGlobal, LocationGlobalRelative
+from pymavlink import mavutil # Needed for command message definitions
+import math
 import time
 import argparse
 
 """
 HOW TO USE:
 python <this file>.py --connect /dev/<connection name>
-ex: python arm_test.py --connect /dev/ttyACM0
+ex: python thrust_example.py --connect /dev/ttyACM0
 
 DEVELOPER NOTES:
-- This file should work as a living template to create a python flight plan
+- Reference link: https://hackmd.io/@willy541222/S15ALdL5d
 - vehicle.is_armable checks if the vehicle is initializing and has a stable GPS connection
 - use vehicle.mode != 'INITIALISING' for initialization check
 """
+
+MAX_THRUST = 1.5
 
 def debugDump():
     print("Autopilot Firmware version: %s" % vehicle.version)
@@ -53,6 +59,11 @@ def arm():
     print("Drone has successfully initialized")
     print("GPS Connection: %s" % vehicle.is_armable)
     
+    try:
+        vehicle.mode = VehicleMode("GUIDED_NOGPS")
+    except:
+        print("Could not set vehicle mode to GUIDED_NOGPS")
+    
     print("Arming Vehicle now")
     vehicle.armed = True
     
@@ -61,29 +72,24 @@ def arm():
         time.sleep(1)
 
     print("Vehicle is now armed.")
+    
+def thrust(thrust):
+    if thrust > MAX_THRUST or thrust < 0:
+        print("Invalid thrust request: %s" % thrust)
+        return
+    # TODO: Apply thrust via message factory
 
 def disarm():
     print("Disarming vehicle, dumping vehicle state")
     vehicle.armed = False
     vehicle.close()
-    debugDump()  
-     
-####################################################################################
-# Write your flight plan here
-
-def do_flight():
-    arm()
-    time.sleep(10)
+    debugDump()    
 
 ####################################################################################
 
-# Create argument parser
+# Parse arguments
 parser = argparse.ArgumentParser(description='commands')
-
-# Add Arguments here
 parser.add_argument('--connect')
-
-# Parse argument
 args = parser.parse_args()
 
 # Connect to copter
@@ -94,9 +100,7 @@ debugDump()
 
 # Run flight plan
 try:
-    do_flight()
-except Exception as e:
-    print("ERROR!")
-    print(e)
+    arm()
+    time.sleep(10)
 finally:
     disarm()

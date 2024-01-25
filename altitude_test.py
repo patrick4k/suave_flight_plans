@@ -4,8 +4,8 @@ import argparse
 
 """
 HOW TO USE:
-python <this file>.py --connect /dev/<connection name>
-ex: python arm_test.py --connect /dev/ttyACM0
+python <this file>.py --connect /dev/<connection name> --alt <target altitude>
+ex: python arm_test.py --connect /dev/ttyACM0 --alt 10
 
 DEVELOPER NOTES:
 - This file should work as a living template to create a python flight plan
@@ -71,8 +71,21 @@ def disarm():
 ####################################################################################
 # Write your flight plan here
 
+def takeoff():
+    targetAlt = float(args.alt)
+    vehicle.simple_takeoff(targetAlt)
+
+    while True:
+        currAlt = vehicle.location.global_relative_frame.alt
+        print("Altitude = ", currAlt)
+        if currAlt >= 0.95*targetAlt:
+            print("Reached target altitude")
+            break
+        time.sleep(0.5)
+        
 def do_flight():
     arm()
+    takeoff()
     time.sleep(10)
 
 ####################################################################################
@@ -82,6 +95,7 @@ parser = argparse.ArgumentParser(description='commands')
 
 # Add Arguments here
 parser.add_argument('--connect')
+parser.add_argument('--alt')
 
 # Parse argument
 args = parser.parse_args()
