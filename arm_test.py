@@ -1,14 +1,10 @@
 from dronekit import connect, VehicleMode, LocationGlobalRelative, APIException
 import time
 import socket
-import exceptions
-import math
 import argparse
 
 ### notes
-## Copter 3.2.1 needs manual mode switch to GUIDED
-## Copter 3.3 can take off in AUTO, provided the mission has a MAV_CMD_NAV_TAKEOFF. 
-# the mission will not start until you explicity send MAV_CMD_MISSION_START message.
+## do not use vehicle.is_armable, its always False even though you can arm it
 
 ## HOW TO USE
 # python <this file>.py --connect /dev/<connection name> --alt <target altitude>
@@ -39,22 +35,24 @@ def debugDump():
     
 def connectMyCopter():
     connection_string = args.connect
+    print("Attempting to connect to vehicle: %s" % connection_string)
     baud_rate = 57600
-    vehicle = connect(connection_string, baud=baud_rate, wait_ready=True)
+    vehicle = connect(connection_string, wait_ready=False, baud=57600)
+    vehicle.wait_ready(True, timeout=600) # wait 10 minute to connect
     print("Vehicle connected, dumping vehicle state")
     return vehicle
 
 def arm():
-    while not vehicle.is_armable:
-        print("Waiting for vehicle to initialize...")
-        time.sleep(1)
-    print("Vehicle is initialize/armable.\n")
+#    vehicle.mode = VehicleMode("GUIDED")
+ #   debugDump()
+  #  while not vehicle.is_armable:
+   #     print("Waiting for vehicle to initialize...")
+    #    time.sleep(1)
+    #print("Vehicle is initialize/armable.\n")
 
-    targetMode = "GUIDED"
-    vehicle.mode = VehicleMode(targetMode)
     vehicle.armed = True
     
-    while not vehicle.armed and vehicle.mode.name != targetMode:
+    while not vehicle.armed: # and vehicle.mode.name != targetMode:
         print("Waiting for drone to become armed...")
         time.sleep(1)
 
@@ -81,7 +79,7 @@ debugDump()
 
 # Run flight plan
 arm()
-time.sleep(5)
+time.sleep(10)
 
 # Disarm
 disarm()
