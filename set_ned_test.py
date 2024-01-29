@@ -82,6 +82,7 @@ def disarm():
 ####################################################################################
 
 def print_ned(cycles = 10, period = 1):
+    debugDump()
     for i in range(cycles):
         print("NED: %s" % vehicle.location.local_frame)
         time.sleep(period)
