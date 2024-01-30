@@ -19,7 +19,13 @@ DEVELOPER NOTES:
 
 MAX_THRUST = 1.5
 
+class TYPE_MASK:
+    ENABLE_POSITION = 0b0000111111111000
+    ENABLE_VELOCITY = 0b0000111111000111
+
 def debugDump():
+    print()
+    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     print("Autopilot Firmware version: %s" % vehicle.version)
     print("Autopilot capabilities (supports ftp): %s" % vehicle.capabilities.ftp)
     print("Global Location: %s" % vehicle.location.global_frame)
@@ -42,6 +48,8 @@ def debugDump():
     print("System status: %s" % vehicle.system_status.state)
     print("Mode: %s" % vehicle.mode.name)    # settable
     print("Armed: %s" % vehicle.armed)    # settable
+    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    print()
     
 def connectMyCopter():
     connection_string = args.connect
@@ -63,6 +71,8 @@ def arm():
         vehicle.mode = VehicleMode("GUIDED_NOGPS")
     except:
         print("Could not set vehicle mode to GUIDED_NOGPS")
+        time.sleep(5)
+        vehicle.mode = VehicleMode("GUIDED")
     
     print("Arming Vehicle now")
     vehicle.armed = True
@@ -72,10 +82,19 @@ def arm():
         time.sleep(1)
 
     print("Vehicle is now armed.")
+    
+    if vehicle.mode.name != "GUIDED_NOGPS" and vehicle.mode.name != "GUIDED":
+        print("Vechicle is in %s mode, not GUIDED or GUIDED_NOGPS mode" % vehicle.mode.name)
+        time.sleep(5)
 
 def disarm():
     print("Disarming vehicle, dumping vehicle state")
     vehicle.armed = False
+    
+    while vehicle.armed:
+        print("Waiting for drone to become disarmed...")
+        time.sleep(1)
+        
     vehicle.close()
     debugDump()    
 
@@ -106,7 +125,7 @@ def goto_position_target_local_ned(north, east, down):
         0,       # time_boot_ms (not used)
         0, 0,    # target system, target component
         mavutil.mavlink.MAV_FRAME_LOCAL_NED, # frame
-        0b0000111111111000, # type_mask (only positions enabled)
+        TYPE_MASK.ENABLE_POSITION, # type_mask (only positions enabled)
         north, east, down, # x, y, z positions (or North, East, Down in the MAV_FRAME_BODY_NED frame
         0, 0, 0, # x, y, z velocity in m/s  (not used)
         0, 0, 0, # x, y, z acceleration (not supported yet, ignored in GCS_Mavlink)
@@ -138,11 +157,23 @@ def send_ned_velocity(velocity_x, velocity_y, velocity_z, cycles, period=1):
         0,       # time_boot_ms (not used)
         0, 0,    # target system, target component
         mavutil.mavlink.MAV_FRAME_LOCAL_NED, # frame
-        0b0000111111000111, # type_mask (only speeds enabled)
+        TYPE_MASK.ENABLE_VELOCITY, # type_mask (only speeds enabled)
         0, 0, 0, # x, y, z positions (not used)
         velocity_x, velocity_y, velocity_z, # x, y, z velocity in m/s
         0, 0, 0, # x, y, z acceleration (not supported yet, ignored in GCS_Mavlink)
         0, 0)    # yaw, yaw_rate (not supported yet, ignored in GCS_Mavlink) 
+    
+    # debug
+    msg_ignore = vehicle.message_factory.set_position_target_local_ned_encode(
+        0,  # System ID
+        mavutil.mavlink.MAV_COMP_ID_ALL,  # Component ID
+        0,  # Time Boot MS (not used)
+        TYPE_MASK.ENABLE_VELOCITY,  # Position Target Flags (enable velocity)
+        0, 0, 0,  # x, y, z positions (not used)
+        velocity_x, velocity_y, velocity_z,  # x, y, z velocities
+        0, 0, 0,  # x, y, z acceleration (not used)
+        0, 0  # yaw, yaw rate (not used)
+    )
 
     # send command to vehicle on 1/period Hz cycle
     for x in range(0,cycles):
