@@ -223,6 +223,7 @@ try:
         elif mode == 3:
             print("Exiting program")
             break
-            
-finally:
     disarm()
+    
+except KeyboardInterrupt:
+    disarm()    
