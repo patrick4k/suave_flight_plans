@@ -71,7 +71,6 @@ def arm():
         vehicle.mode = VehicleMode("GUIDED_NOGPS")
     except:
         print("Could not set vehicle mode to GUIDED_NOGPS")
-        time.sleep(5)
         vehicle.mode = VehicleMode("GUIDED")
     
     print("Arming Vehicle now")
@@ -85,7 +84,6 @@ def arm():
     
     if vehicle.mode.name != "GUIDED_NOGPS" and vehicle.mode.name != "GUIDED":
         print("Vechicle is in %s mode, not GUIDED or GUIDED_NOGPS mode" % vehicle.mode.name)
-        time.sleep(5)
 
 def disarm():
     print("Disarming vehicle, dumping vehicle state")
@@ -164,21 +162,40 @@ def send_ned_velocity(velocity_x, velocity_y, velocity_z, cycles, period=1):
         0, 0)    # yaw, yaw_rate (not supported yet, ignored in GCS_Mavlink) 
     
     # debug
-    msg_ignore = vehicle.message_factory.set_position_target_local_ned_encode(
-        0,  # System ID
-        mavutil.mavlink.MAV_COMP_ID_ALL,  # Component ID
-        0,  # Time Boot MS (not used)
-        TYPE_MASK.ENABLE_VELOCITY,  # Position Target Flags (enable velocity)
-        0, 0, 0,  # x, y, z positions (not used)
-        velocity_x, velocity_y, velocity_z,  # x, y, z velocities
-        0, 0, 0,  # x, y, z acceleration (not used)
-        0, 0  # yaw, yaw rate (not used)
-    )
+#    msg_ignore = vehicle.message_factory.set_position_target_local_ned_encode(
+#        0,  # System ID
+#        mavutil.mavlink.MAV_COMP_ID_ALL,  # Component ID
+#        0,  # Time Boot MS (not used)
+#        TYPE_MASK.ENABLE_VELOCITY,  # Position Target Flags (enable velocity)
+#        0, 0, 0,  # x, y, z positions (not used)
+#        velocity_x, velocity_y, velocity_z,  # x, y, z velocities
+#        0, 0, 0,  # x, y, z acceleration (not used)
+#        0, 0  # yaw, yaw rate (not used)
+#    )
 
     # send command to vehicle on 1/period Hz cycle
     for x in range(0,cycles):
         vehicle.send_mavlink(msg)
         time.sleep(period)
+
+def set_channel(n, val):
+# val range: 988 - 2012
+    print("Trying to update channel %s to value of %s" % (n, val))
+    val0 = vehicle.channels[n]
+    print("Initial vehicle.channels[%s] = %s" % (n, val0))
+    if val == val0:
+        print("Nothing to change")
+        return
+    vehicle.channels.overrides[n] = val
+#    vehicle.channels.overrides = {n: val}
+#    vehicle.channels.__setitem__(n, val)
+    valf = vehicle.channels[n]
+    print("Final vehicle.channels[%s] = %s" % (n,valf))
+    if val0 == valf:
+        print("Could not change channel %s" % n)
+
+def set_servo(n, val):
+    mavutil.mavfile.set_servo(n, val)
     
 ####################################################################################
 
@@ -197,7 +214,7 @@ debugDump()
 try:
     arm()
     while True:
-        mode = int(input("Select mode, [0] print, [1] location, [2] velocity, [3] exit: "))
+        mode = int(input("Select mode, [0] print, [1] arm, [2] channel, [3] velocity, [4] change mode, [5] exit: "))
         if mode == 0:
             cycles = int(input("Input number of cycles: "))
             period = float(input("Input period duration: "))
@@ -205,22 +222,42 @@ try:
             print_ned(cycles, period)
             print("Finsihed")
         elif mode == 1:
-            n_location = float(input("Input n position: "))
-            e_location = float(input("Input e position: "))
-            d_location = float(input("Input d position: "))
-            print("Targeting NED position of %s, %s, %s" % (n_location, e_location, d_location))
-            goto_position_target_local_ned(n_location, e_location, d_location)
-            print("Finished")
+            arm()
         elif mode == 2:
-            x_vel = float(input("Input x velocity: "))
-            y_vel = float(input("Input y velocity: "))
-            z_vel = float(input("Input z velocity: "))
-            cycles = int(input("Input number of cycles: "))
-            period = float(input("Input period duration: "))
+            n = input("Input channel number: ")
+            val = int(input("Input new value: "))
+            set_channel(n, val)
+        elif mode == 3:
+           # x_vel = float(input("Input x velocity: "))
+           # y_vel = float(input("Input y velocity: "))
+           # z_vel = float(input("Input z velocity: "))
+           # cycles = int(input("Input number of cycles: "))
+           # period = float(input("Input period duration: "))
+            x_vel = 5
+            y_vel = 0
+            z_vel = 0
+            cycles = 1
+            period = 5
             print("Targeting XYZ velocity of %s, %s, %s" % (x_vel, y_vel, z_vel))
             send_ned_velocity(x_vel, y_vel, z_vel, cycles, period)
             print("Finished")
-        elif mode == 3:
+        elif mode == 4:
+            done = False
+            while not done:
+                try:
+                    desired_mode = input("Mode: ")
+                    vehicle.mode = VehicleMode(desired_mode)
+                    for i in range(0, 10):
+                        if vehicle.mode.name == desired_mode:
+                            print("Mode has successfully been updated")
+                            done = True
+                            break
+                        time.sleep(1)
+                    if not done:
+                        print("Timeout, could not switch to mode")
+                except:
+                    print("Could not switch to mode")
+        elif mode == 5:
             print("Exiting program")
             break
     disarm()

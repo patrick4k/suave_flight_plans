@@ -1,0 +1,5 @@
+see https://github.com/ArduPilot/pymavlink/pull/466
+# "cd ~/myvenv/lib/python3.11/site-packages/pymavlink"
+"sudo nano ~/myvenv/lib/python3.11/site-packages/pymavlink/mavutil.py"
+goto line 700, scroll down till you see def set_mode_px4()
+after last line in the function add: "self.mav.set_mode_send(self.target_system, mavlink.MAV_MODE_FLAG_CUSTOM_MODE_ENABLED, mode)"
