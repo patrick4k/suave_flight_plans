@@ -52,7 +52,11 @@ def debugDump():
     print()
     
 def connectMyCopter():
-    connection_string = args.connect
+    connection_string = ""
+    if args.connect is not None:
+        connection_string = args.connect
+    else: 
+        connection_string = input("Enter device: ")
     print("Attempting to connect to vehicle: %s" % connection_string)
     vehicle = connect(connection_string, wait_ready=True, baud=57600)
     print("Vehicle connected, dumping vehicle state")
@@ -67,12 +71,6 @@ def arm():
     print("Drone has successfully initialized")
     print("GPS Connection: %s" % vehicle.is_armable)
     
-    try:
-        vehicle.mode = VehicleMode("GUIDED_NOGPS")
-    except:
-        print("Could not set vehicle mode to GUIDED_NOGPS")
-        vehicle.mode = VehicleMode("GUIDED")
-    
     print("Arming Vehicle now")
     vehicle.armed = True
     
@@ -81,9 +79,6 @@ def arm():
         time.sleep(1)
 
     print("Vehicle is now armed.")
-    
-    if vehicle.mode.name != "GUIDED_NOGPS" and vehicle.mode.name != "GUIDED":
-        print("Vechicle is in %s mode, not GUIDED or GUIDED_NOGPS mode" % vehicle.mode.name)
 
 def disarm():
     print("Disarming vehicle, dumping vehicle state")
