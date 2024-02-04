@@ -1,0 +1,46 @@
+Recorded flight on 2024-02-04-14-03-57
+This file will be overridden if executed again
+
+WARNING: Drone is not ok, "Not yet connected"
+dict_keys(['connect', 'arm', 'disarm', 'thrust', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvelacc', 'write', 'debug', 'edit', 'exit'])
+Select: attitude
+LOG: Starting 'attitude'
+LOG: Armming drone...
+ERROR: ['Traceback (most recent call last):\n', '  File "C:\\Users\\Patrick\\Documents\\Code\\EPPL\\suave\\suave_flight_plans\\control_test.py", line 443, in <module>\n    asyncio.run(plan())\n', '  File "C:\\Program Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\lib\\asyncio\\runners.py", line 44, in run\n    return loop.run_until_complete(main)\n', '  File "C:\\Program Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\lib\\asyncio\\base_events.py", line 649, in run_until_complete\n    return future.result()\n', '  File "C:\\Users\\Patrick\\Documents\\Code\\EPPL\\suave\\suave_flight_plans\\control_test.py", line 204, in arm\n    await drone.action.arm()\n', '  File "C:\\Users\\Patrick\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python310\\site-packages\\mavsdk\\system.py", line 171, in action\n    raise RuntimeError(self.error_uninitialized("Action"))\n', 'RuntimeError: {plugin_name} plugin has not been initialized! Did you run `System.connect()`?\n']
+ERROR: Failed flight 'attitude'
+WARNING: Drone is not ok, "Not yet connected"
+dict_keys(['connect', 'arm', 'disarm', 'thrust', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvelacc', 'write', 'debug', 'edit', 'exit'])
+Select: edit
+LOG: Starting 'edit'
+LOG: endonfail = 1
+dict_keys(['endonfail'])
+Select parameter: endonfail
+LOG: endonfail = 1
+New value: 0
+LOG: endonfail = 0
+SUCCESS: Finished 'edit'
+WARNING: Drone is not ok, "Not yet connected"
+dict_keys(['connect', 'arm', 'disarm', 'thrust', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvelacc', 'write', 'debug', 'edit', 'exit'])
+Select: attitude
+LOG: Starting 'attitude'
+LOG: Armming drone...
+ERROR: ['Traceback (most recent call last):\n', '  File "C:\\Users\\Patrick\\Documents\\Code\\EPPL\\suave\\suave_flight_plans\\control_test.py", line 443, in <module>\n    asyncio.run(plan())\n', '  File "C:\\Program Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\lib\\asyncio\\runners.py", line 44, in run\n    return loop.run_until_complete(main)\n', '  File "C:\\Program Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\lib\\asyncio\\base_events.py", line 649, in run_until_complete\n    return future.result()\n', '  File "C:\\Users\\Patrick\\Documents\\Code\\EPPL\\suave\\suave_flight_plans\\control_test.py", line 204, in arm\n    await drone.action.arm()\n', '  File "C:\\Users\\Patrick\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python310\\site-packages\\mavsdk\\system.py", line 171, in action\n    raise RuntimeError(self.error_uninitialized("Action"))\n', 'RuntimeError: {plugin_name} plugin has not been initialized! Did you run `System.connect()`?\n']
+LOG: Setting Attitude setpoint...
+ERROR: ['Traceback (most recent call last):\n', '  File "C:\\Users\\Patrick\\Documents\\Code\\EPPL\\suave\\suave_flight_plans\\control_test.py", line 443, in <module>\n    asyncio.run(plan())\n', '  File "C:\\Program Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\lib\\asyncio\\runners.py", line 44, in run\n    return loop.run_until_complete(main)\n', '  File "C:\\Program Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\lib\\asyncio\\base_events.py", line 649, in run_until_complete\n    return future.result()\n', '  File "C:\\Users\\Patrick\\Documents\\Code\\EPPL\\suave\\suave_flight_plans\\control_test.py", line 267, in attitude_setpoint\n    await drone.offboard.set_attitude(Attitude(0.0, 0.0, 0.0, 0.0))\n', '  File "C:\\Users\\Patrick\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python310\\site-packages\\mavsdk\\system.py", line 291, in offboard\n    raise RuntimeError(self.error_uninitialized("Offboard"))\n', 'RuntimeError: {plugin_name} plugin has not been initialized! Did you run `System.connect()`?\n']
+LOG: Starting offboard mode...
+ERROR: ['Traceback (most recent call last):\n', '  File "C:\\Users\\Patrick\\Documents\\Code\\EPPL\\suave\\suave_flight_plans\\control_test.py", line 443, in <module>\n    asyncio.run(plan())\n', '  File "C:\\Program Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\lib\\asyncio\\runners.py", line 44, in run\n    return loop.run_until_complete(main)\n', '  File "C:\\Program Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\lib\\asyncio\\base_events.py", line 649, in run_until_complete\n    return future.result()\n', '  File "C:\\Users\\Patrick\\Documents\\Code\\EPPL\\suave\\suave_flight_plans\\control_test.py", line 231, in start_offboard\n    is_active = await drone.offboard.is_active()\n', '  File "C:\\Users\\Patrick\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python310\\site-packages\\mavsdk\\system.py", line 291, in offboard\n    raise RuntimeError(self.error_uninitialized("Offboard"))\n', 'RuntimeError: {plugin_name} plugin has not been initialized! Did you run `System.connect()`?\n']
+Enter roll = 0
+Enter pitch = -0
+Enter yaw = 1
+Enter thrust = 0.5
+LOG: Setting attitude to: Attitude: [roll_deg: 0.0, pitch_deg: -0.0, yaw_deg: 1.0, thrust_value: 0.5]
+ERROR: ['Traceback (most recent call last):\n', '  File "C:\\Users\\Patrick\\Documents\\Code\\EPPL\\suave\\suave_flight_plans\\control_test.py", line 443, in <module>\n    asyncio.run(plan())\n', '  File "C:\\Program Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\lib\\asyncio\\runners.py", line 44, in run\n    return loop.run_until_complete(main)\n', '  File "C:\\Program Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\lib\\asyncio\\base_events.py", line 649, in run_until_complete\n    return future.result()\n', '  File "C:\\Users\\Patrick\\Documents\\Code\\EPPL\\suave\\suave_flight_plans\\control_test.py", line 282, in set_attitude\n    await drone.offboard.set_attitude(attitude)\n', '  File "C:\\Users\\Patrick\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python310\\site-packages\\mavsdk\\system.py", line 291, in offboard\n    raise RuntimeError(self.error_uninitialized("Offboard"))\n', 'RuntimeError: {plugin_name} plugin has not been initialized! Did you run `System.connect()`?\n']
+LOG: Sleeping for 10 seconds...
+LOG: Awake!
+LOG: Disarmming drone
+ERROR: ['Traceback (most recent call last):\n', '  File "C:\\Users\\Patrick\\Documents\\Code\\EPPL\\suave\\suave_flight_plans\\control_test.py", line 443, in <module>\n    asyncio.run(plan())\n', '  File "C:\\Program Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\lib\\asyncio\\runners.py", line 44, in run\n    return loop.run_until_complete(main)\n', '  File "C:\\Program Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\lib\\asyncio\\base_events.py", line 649, in run_until_complete\n    return future.result()\n', '  File "C:\\Users\\Patrick\\Documents\\Code\\EPPL\\suave\\suave_flight_plans\\control_test.py", line 216, in disarm\n    await drone.action.disarm()\n', '  File "C:\\Users\\Patrick\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python310\\site-packages\\mavsdk\\system.py", line 171, in action\n    raise RuntimeError(self.error_uninitialized("Action"))\n', 'RuntimeError: {plugin_name} plugin has not been initialized! Did you run `System.connect()`?\n']
+ERROR: Failed flight 'attitude'
+WARNING: Drone is not ok, "Not yet connected"
+dict_keys(['connect', 'arm', 'disarm', 'thrust', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvelacc', 'write', 'debug', 'edit', 'exit'])
+Select: exit
+LOG: Starting 'exit'
