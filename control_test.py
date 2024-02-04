@@ -217,13 +217,19 @@ async def disarm():
     
     async def wait_until_disarmed():
         armed = True
+        i = 0
+        I = 30
         while armed:
+            await asyncio.sleep(1)
+            i += 1
+            if i > I:
+                raise RuntimeError(f"Timeout waiting for disarm for {I} seconds!")
             armed = False
             async for is_armed in drone.telemetry.armed():
                 if is_armed:
                     armed = True
-    
-    wait_until_disarmed()
+                    
+    await wait_until_disarmed()
     succ("Drone disarming complete!")
     
 async def start_offboard():
@@ -376,10 +382,10 @@ async def set_position_velocity_acceleration_ned():
     log(f"Setting acceleration = {acceleration}")
     await drone.offboard.set_position_velocity_acceleration_ned(position, velocity, acceleration)
 
-def sleep(sec):
+def sleep(n):
     async def sleep_n():
-        log(f"Sleeping for {sec} seconds...")
-        await asyncio.sleep(sec)
+        log(f"Sleeping for {n} seconds...")
+        await asyncio.sleep(n)
         log("Awake!")
     return sleep_n
     
@@ -409,25 +415,26 @@ async def edit_params():
 # Flight plan Definition 
 SLEEP_TIME = 10
 flight_plan = {
-    "connect": [connect],
+    "connect": [connect, print_state],
     "arm": [arm],
     "disarm": [disarm],
+    "offboard": [start_offboard, sleep(SLEEP_TIME), stop_offboard],
     "thrust": [arm, attitude_setpoint, start_offboard, thrust, sleep(SLEEP_TIME), disarm],
     "attitude": [arm, attitude_setpoint, start_offboard, set_attitude, sleep(SLEEP_TIME), disarm],
     "velocity_ned": [arm, velocity_ned_setpoint, start_offboard, set_velocity_ned, sleep(SLEEP_TIME), disarm],
     "velocity_body": [arm, velocity_body_setpoint, start_offboard, set_velocity_body, sleep(SLEEP_TIME), disarm],
     "position": [arm, position_ned_setpoint, start_offboard, set_position_ned, sleep(SLEEP_TIME), disarm],
     "acceleration": [arm, acceleration_ned_setpoint, start_offboard, set_acceleration_ned, sleep(SLEEP_TIME), disarm],
-    "posvelacc": [arm, position_velocity_acceleration_ned_setpoint,start_offboard, set_position_velocity_acceleration_ned, sleep(SLEEP_TIME), disarm],
+    "posvelacc": [arm, position_velocity_acceleration_ned_setpoint, start_offboard, set_position_velocity_acceleration_ned, sleep(SLEEP_TIME), disarm],
     "write": [write_now],
     "debug": [print_state],
     "edit": [print_params, edit_params],
     "exit": [write_exit, exit]
 }
 
+# Execute program
 drone_result: Result[System] = Result(err="Not yet connected")
 drone = System()
-
 while True:
     if drone_result:
         drone = drone_result.unwrap()
