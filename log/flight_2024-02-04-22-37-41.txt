@@ -1,0 +1,49 @@
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: connect
+LOG: Starting 'connect'
+LOG: Connecting to address = serial:///dev/ttyUSB0:57600
+SUCCESS: Successfully connected to serial:///dev/ttyUSB0:57600!
+LOG: Connected = True
+LOG: Offboard = False
+LOG: Drone meets requirements for arming without GPS.
+SUCCESS: Finished 'connect'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: arm
+LOG: Starting 'arm'
+LOG: Armming drone...
+SUCCESS: Drone arming complete!
+SUCCESS: Finished 'arm'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: disarm
+LOG: Starting 'disarm'
+LOG: Disarmming drone
+SUCCESS: Drone disarming complete!
+SUCCESS: Finished 'disarm'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: upnorth
+LOG: Starting 'upnorth'
+LOG: Armming drone...
+SUCCESS: Drone arming complete!
+LOG: Setting Velocity NED setpoint...
+SUCCESS: Setpoint is set!
+LOG: Starting offboard mode...
+LOG: Offboard.is_active = True
+SUCCESS: Start offboard complete!
+LOG: Setting velocity to VelocityNedYaw: [north_m_s: 0.0, east_m_s: 0.0, down_m_s: -0.5, yaw_deg: 0.0]
+SUCCESS: Finished setting velocity!
+LOG: Sleeping for 2 seconds...
+LOG: Awake!
+LOG: Setting velocity to VelocityNedYaw: [north_m_s: 0.75, east_m_s: 0.0, down_m_s: 0.0, yaw_deg: 0.0]
+SUCCESS: Finished setting velocity!
+LOG: Sleeping for 10 seconds...
+LOG: Awake!
+LOG: Setting Velocity NED setpoint...
+SUCCESS: Setpoint is set!
+LOG: Sleeping for 5 seconds...
+LOG: Awake!
+LOG: Disarmming drone
+ERROR: ['Traceback (most recent call last):\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 425, in main\n    await plan()\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 208, in disarm\n    await drone.action.disarm()\n', '  File "/home/suave/myvenv/lib/python3.11/site-packages/mavsdk/action.py", line 343, in disarm\n    raise ActionError(result, "disarm()")\n', "mavsdk.action.ActionError: COMMAND_DENIED_NOT_LANDED: 'Command Denied Not Landed'; origin: disarm(); params: ()\n"]
+ERROR: Failed flight 'upnorth'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: write
+LOG: Starting 'write'

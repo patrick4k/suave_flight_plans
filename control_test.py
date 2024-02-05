@@ -145,18 +145,12 @@ class Parameters:
 
 async def print_state():
     connected = False
-    global_est = False
     offboard =  await drone.offboard.is_active()
     async for state in drone.core.connection_state():
         if state.is_connected:
             connected = True
             break
-    async for health in drone.telemetry.health():
-        if health.is_global_position_ok and health.is_home_position_ok:
-            global_est = True
-            break
     log(f"Connected = {connected}")
-    log(f"Global positioning = {global_est}")
     log(f"Offboard = {offboard}")
     async def check_arm_requirements():
         async for info in drone.telemetry.health():
@@ -166,7 +160,7 @@ async def print_state():
     else:
         log("Drone meets requirements for arming without GPS.")
     
-async def connect_drone() -> Result[System]:
+async def connect_drone():
     connection_string = ""
     if args.connect is not None:
         connection_string = args.connect
@@ -174,7 +168,6 @@ async def connect_drone() -> Result[System]:
         connection_string = input("Enter device: ")
     address = f"serial://{connection_string}:57600"
     log(f"Connecting to address = {address}")
-    drone = System()
     try:
         await drone.connect(system_address=address)
         print("Waiting for drone to connect...")
@@ -187,9 +180,8 @@ async def connect_drone() -> Result[System]:
             succ(f"Successfully connected to {address}!")
         else:
             err(f"Not successfully connected to {address}!")
-        return Result(drone)
     except:
-        return Result(err=f"Failed to connect to {address}")
+        err(f"Failed to connect to {address}")
     
 async def connect():
     result = await connect_drone()
@@ -214,30 +206,10 @@ async def arm():
 async def disarm():
     log("Disarmming drone")
     await drone.action.disarm()
-    
-    async def wait_until_disarmed():
-        armed = True
-        i = 0
-        I = 30
-        while armed:
-            await asyncio.sleep(1)
-            i += 1
-            if i > I:
-                raise RuntimeError(f"Timeout waiting for disarm for {I} seconds!")
-            armed = False
-            async for is_armed in drone.telemetry.armed():
-                if is_armed:
-                    armed = True
-                    
-    await wait_until_disarmed()
     succ("Drone disarming complete!")
     
 async def start_offboard():
     log("Starting offboard mode...")
-    is_active = await drone.offboard.is_active()
-    if is_active:
-        succ("Drone already in offboard!")
-        return
     try:
         await drone.offboard.start()
         is_active = await drone.offboard.is_active()
@@ -252,9 +224,6 @@ async def start_offboard():
 
 async def stop_offboard():
     log("Stopping offboard...")
-    is_active = await drone.offboard.is_active()
-    if not is_active:
-        succ("Drone is already not in offboard!")
     try:
         await drone.offboard.stop()
         is_active = await drone.offboard.is_active()
@@ -329,6 +298,16 @@ async def set_velocity_ned():
     log(f"Setting velocity to {velocity}")
     await drone.offboard.set_velocity_ned(velocity)
     succ("Finished setting velocity!")
+async def set_velocity_up():
+    velocity = VelocityNedYaw(0.0, 0.0, -0.5, 0.0)
+    log(f"Setting velocity to {velocity}")
+    await drone.offboard.set_velocity_ned(velocity)
+    succ("Finished setting velocity!")
+async def set_velocity_north():
+    velocity = VelocityNedYaw(0.75, 0.0, 0.0, 0.0)
+    log(f"Setting velocity to {velocity}")
+    await drone.offboard.set_velocity_ned(velocity)
+    succ("Finished setting velocity!")
     
 # Velocity Body
 async def velocity_body_setpoint():
@@ -359,13 +338,12 @@ async def set_acceleration_ned():
     succ("Finished setting acceleration!")
     
 # Position Velocity Acceleration NED
-async def position_velocity_acceleration_ned_setpoint():
-    log("Setting Position Velocity Acceleration NED setpoint...")
+async def position_velocity_ned_setpoint():
+    log("Setting Position Velocity NED setpoint...")
     await drone.offboard.set_position_ned(PositionNedYaw(0.0, 0.0, 0.0, 0.0))
     await drone.offboard.set_velocity_ned(VelocityNedYaw(0.0, 0.0, 0.0, 0.0))
-    await drone.offboard.set_acceleration_ned(AccelerationNed(0.0, 0.0, 0.0))
     succ("Setpoint is set!")
-async def set_position_velocity_acceleration_ned():
+async def set_position_velocity_ned():
     axis_list = {"north": 0, "east": 0, "down": 0, "yaw": 0}
     for key in axis_list.keys():
         axis_list[key] = getfloat(f"Enter position {key} = ")
@@ -373,14 +351,9 @@ async def set_position_velocity_acceleration_ned():
     for key in axis_list.keys():
         axis_list[key] = getfloat(f"Enter velocity {key} = ")
     velocity = VelocityNedYaw(axis_list["north"], axis_list["east"], axis_list["down"], axis_list["yaw"])
-    axis_list = {"north": 0, "east": 0, "down": 0}
-    for key in axis_list.keys():
-        axis_list[key] = getfloat(f"Enter acceleration {key} = ")
-    acceleration = AccelerationNed(axis_list["north"], axis_list["east"], axis_list["down"])
     log(f"Setting position = {position}")
     log(f"Setting velocity = {velocity}")
-    log(f"Setting acceleration = {acceleration}")
-    await drone.offboard.set_position_velocity_acceleration_ned(position, velocity, acceleration)
+    await drone.offboard.set_position_velocity_ned(position, velocity)
 
 def sleep(n):
     async def sleep_n():
@@ -400,6 +373,7 @@ args = argparser.parse_args()
 # Parameters
 parameters = Parameters()
 parameters.add_parameter("endonfail", 1, int)
+parameters.add_parameter("should_exit", 0, int)
 async def print_params():
     ks = parameters.getkeys()
     for k in ks:
@@ -411,57 +385,64 @@ async def edit_params():
     log(f"{param} = {parameters.get(param)}")
     parameters.set(param, getstr("New value: "))
     log(f"{param} = {parameters.get(param)}")
+async def exit_program():
+    parameters.set("should_exit", "1")
 
 # Flight plan Definition 
-SLEEP_TIME = 10
+SLEEP_TIME = 5
 flight_plan = {
-    "connect": [connect, print_state],
+    "connect": [connect_drone, print_state],
     "arm": [arm],
     "disarm": [disarm],
     "offboard": [start_offboard, sleep(SLEEP_TIME), stop_offboard],
-    "thrust": [arm, attitude_setpoint, start_offboard, thrust, sleep(SLEEP_TIME), disarm],
-    "attitude": [arm, attitude_setpoint, start_offboard, set_attitude, sleep(SLEEP_TIME), disarm],
+    "thrust": [arm, attitude_setpoint, start_offboard, thrust, sleep(SLEEP_TIME), attitude_setpoint, sleep(SLEEP_TIME), disarm],
+    "upnorth": [arm, velocity_ned_setpoint, start_offboard, set_velocity_up, sleep(2), set_velocity_north, sleep(10), velocity_ned_setpoint, sleep(SLEEP_TIME), disarm],
+    "attitude": [arm, attitude_setpoint, start_offboard, sleep(2), set_attitude, sleep(SLEEP_TIME), disarm],
     "velocity_ned": [arm, velocity_ned_setpoint, start_offboard, set_velocity_ned, sleep(SLEEP_TIME), disarm],
     "velocity_body": [arm, velocity_body_setpoint, start_offboard, set_velocity_body, sleep(SLEEP_TIME), disarm],
     "position": [arm, position_ned_setpoint, start_offboard, set_position_ned, sleep(SLEEP_TIME), disarm],
     "acceleration": [arm, acceleration_ned_setpoint, start_offboard, set_acceleration_ned, sleep(SLEEP_TIME), disarm],
-    "posvelacc": [arm, position_velocity_acceleration_ned_setpoint, start_offboard, set_position_velocity_acceleration_ned, sleep(SLEEP_TIME), disarm],
+    "posvel": [arm, position_velocity_ned_setpoint, start_offboard, set_position_velocity_ned, sleep(SLEEP_TIME), disarm],
     "write": [write_now],
     "debug": [print_state],
     "edit": [print_params, edit_params],
-    "exit": [write_exit, exit]
+    "exit": [write_exit, exit_program]
 }
 
 # Execute program
 drone_result: Result[System] = Result(err="Not yet connected")
 drone = System()
-while True:
-    if drone_result:
-        drone = drone_result.unwrap()
-    else:
-        warn(f"Drone is not ok, \"{drone_result._errmsg}\"")
-    plan_name = getstr("%s\nSelect: " % flight_plan.keys())
-    plan_list = flight_plan.get(plan_name)
-    if plan_list is not None:
-        log(f"Starting '{plan_name}'")
-        success = True
-        for plan in plan_list:
-            try:
-                asyncio.run(plan())    
-            except Exception as e:
-                success = False
-                err(traceback.format_exception(e))
-            except KeyboardInterrupt:
-                success = False
-                err(f"Keyboard interruption, ending '{plan_name}'")
-                break
-            if not success and parameters.get("endonfail"):
-                break
-        if success:
-            succ(f"Finished '{plan_name}'")
+
+async def main():
+    while True:
+        plan_name = getstr("%s\nSelect: " % flight_plan.keys())
+        plan_list = flight_plan.get(plan_name)
+        if plan_list is not None:
+            log(f"Starting '{plan_name}'")
+            success = True
+            for plan in plan_list:
+                try:
+                    await plan()
+                except Exception as e:
+                    success = False
+                    err(traceback.format_exception(e))
+                except KeyboardInterrupt:
+                    success = False
+                    err(f"Keyboard interruption, ending '{plan_name}'")
+                    break
+                if not success and parameters.get("endonfail"):
+                    break
+                if parameters.get("should_exit"):
+                    log("should_exit = True")
+                    return
+            if success:
+                succ(f"Finished '{plan_name}'")
+            else:
+                err(f"Failed flight '{plan_name}'")
         else:
-            err(f"Failed flight '{plan_name}'")
-    else:
-        warn(f"Could not find  named '{plan_name}'")
+            warn(f"Could not find  named '{plan_name}'")
+
+asyncio.run(main())
+log("Exiting program...")
 
 ##################################################################################

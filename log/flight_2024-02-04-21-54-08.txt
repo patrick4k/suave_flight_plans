@@ -1,0 +1,83 @@
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: connect
+LOG: Starting 'connect'
+LOG: Connecting to address = serial:///dev/ttyUSB0:57600
+SUCCESS: Successfully connected to serial:///dev/ttyUSB0:57600!
+LOG: Connected = True
+LOG: Offboard = False
+LOG: Drone meets requirements for arming without GPS.
+SUCCESS: Finished 'connect'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: thrust
+LOG: Starting 'thrust'
+LOG: Armming drone...
+SUCCESS: Drone arming complete!
+LOG: Setting Attitude setpoint...
+SUCCESS: Setpoint is set!
+LOG: Starting offboard mode...
+LOG: Offboard.is_active = True
+SUCCESS: Start offboard complete!
+Enter thrust [0-1]: 0.1
+LOG: Setting thrust to 0.1
+SUCCESS: Finished setting thrust!
+LOG: Sleeping for 5 seconds...
+LOG: Awake!
+LOG: Setting Attitude setpoint...
+SUCCESS: Setpoint is set!
+LOG: Disarmming drone
+ERROR: ['Traceback (most recent call last):\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 414, in main\n    await plan()\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 208, in disarm\n    await drone.action.disarm()\n', '  File "/home/suave/myvenv/lib/python3.11/site-packages/mavsdk/action.py", line 343, in disarm\n    raise ActionError(result, "disarm()")\n', "mavsdk.action.ActionError: COMMAND_DENIED_NOT_LANDED: 'Command Denied Not Landed'; origin: disarm(); params: ()\n"]
+ERROR: Failed flight 'thrust'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: velocity_body
+LOG: Starting 'velocity_body'
+LOG: Armming drone...
+SUCCESS: Drone arming complete!
+LOG: Setting Velocity Body setpoint...
+SUCCESS: Setpoint is set!
+LOG: Starting offboard mode...
+LOG: Offboard.is_active = True
+SUCCESS: Start offboard complete!
+Enter x = 0
+Enter y = 2
+Enter z = 0
+Enter yaw_rate = 0
+LOG: Setting velocity to VelocityBodyYawspeed: [forward_m_s: 0.0, right_m_s: 2.0, down_m_s: 0.0, yawspeed_deg_s: 0.0]
+SUCCESS: Finished setting velocity!
+LOG: Sleeping for 5 seconds...
+LOG: Awake!
+LOG: Disarmming drone
+SUCCESS: Drone disarming complete!
+SUCCESS: Finished 'velocity_body'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: 
+WARNING: Could not find  named ''
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: 
+WARNING: Could not find  named ''
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: velcoity_body
+WARNING: Could not find  named 'velcoity_body'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: velocity_body
+LOG: Starting 'velocity_body'
+LOG: Armming drone...
+SUCCESS: Drone arming complete!
+LOG: Setting Velocity Body setpoint...
+SUCCESS: Setpoint is set!
+LOG: Starting offboard mode...
+LOG: Offboard.is_active = True
+SUCCESS: Start offboard complete!
+Enter x = 0
+Enter y = 0
+Enter z = 5
+Enter yaw_rate = 0
+LOG: Setting velocity to VelocityBodyYawspeed: [forward_m_s: 0.0, right_m_s: 0.0, down_m_s: 5.0, yawspeed_deg_s: 0.0]
+SUCCESS: Finished setting velocity!
+LOG: Sleeping for 5 seconds...
+LOG: Awake!
+LOG: Disarmming drone
+SUCCESS: Drone disarming complete!
+SUCCESS: Finished 'velocity_body'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: write
+LOG: Starting 'write'

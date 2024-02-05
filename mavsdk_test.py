@@ -55,11 +55,10 @@ async def arm_drone():
         await drone.action.disarm()
         return
 
-    await drone.offboard.set_velocity_ned(VelocityNedYaw(0, 0, -10, 0))
-
+    await drone.offboard.set_velocity_ned(VelocityNedYaw(0, 0, -5.0, 0))
     is_active = await drone.offboard.is_active()
     print(f"Offboard.is_active = {is_active}")
-
+    await asyncio.sleep(5)
     await drone.action.disarm()
 
 parser = argparse.ArgumentParser(description='commands')

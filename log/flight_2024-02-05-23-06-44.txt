@@ -1,6 +1,3 @@
-Recorded flight on 2024-02-05-23-06-44
-This file will be overridden if executed again
-
 dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
 Select: connect
 LOG: Starting 'connect'
@@ -35,7 +32,3 @@ SUCCESS: Finished 'thrust'
 dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
 Select: write
 LOG: Starting 'write'
-SUCCESS: Finished 'write'
-dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
-Select: exit
-LOG: Starting 'exit'

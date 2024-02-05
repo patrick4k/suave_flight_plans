@@ -1,0 +1,17 @@
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: connect
+LOG: Starting 'connect'
+LOG: Connecting to address = serial:///dev/ttyUSB0:57600
+ERROR: Failed to connect to serial:///dev/ttyUSB0:57600
+ERROR: ['Traceback (most recent call last):\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 414, in main\n    await plan()\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 148, in print_state\n    offboard =  await drone.offboard.is_active()\n                      ^^^^^^^^^^^^^^\n', '  File "/home/suave/myvenv/lib/python3.11/site-packages/mavsdk/system.py", line 291, in offboard\n    raise RuntimeError(self.error_uninitialized("Offboard"))\n', 'RuntimeError: {plugin_name} plugin has not been initialized! Did you run `System.connect()`?\n']
+ERROR: Failed flight 'connect'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: connect
+LOG: Starting 'connect'
+LOG: Connecting to address = serial:///dev/ttyUSB0:57600
+ERROR: Failed to connect to serial:///dev/ttyUSB0:57600
+ERROR: ['Traceback (most recent call last):\n', '  File "/usr/lib/python3.11/asyncio/runners.py", line 190, in run\n    return runner.run(main)\n           ^^^^^^^^^^^^^^^^\n', '  File "/usr/lib/python3.11/asyncio/runners.py", line 118, in run\n    return self._loop.run_until_complete(task)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', '  File "/usr/lib/python3.11/asyncio/base_events.py", line 640, in run_until_complete\n    self.run_forever()\n', '  File "/usr/lib/python3.11/asyncio/base_events.py", line 607, in run_forever\n    self._run_once()\n', '  File "/usr/lib/python3.11/asyncio/base_events.py", line 1884, in _run_once\n    event_list = self._selector.select(timeout)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', '  File "/usr/lib/python3.11/selectors.py", line 468, in select\n    fd_event_list = self._selector.poll(timeout, max_ev)\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', '  File "/usr/lib/python3.11/asyncio/runners.py", line 157, in _on_sigint\n    raise KeyboardInterrupt()\n', 'KeyboardInterrupt\n', '\nDuring handling of the above exception, another exception occurred:\n\n', 'Traceback (most recent call last):\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 414, in main\n    await plan()\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 148, in print_state\n    offboard =  await drone.offboard.is_active()\n                      ^^^^^^^^^^^^^^\n', '  File "/home/suave/myvenv/lib/python3.11/site-packages/mavsdk/system.py", line 291, in offboard\n    raise RuntimeError(self.error_uninitialized("Offboard"))\n', 'RuntimeError: {plugin_name} plugin has not been initialized! Did you run `System.connect()`?\n']
+ERROR: Failed flight 'connect'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: write
+LOG: Starting 'write'
