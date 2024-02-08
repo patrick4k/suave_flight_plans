@@ -1,4 +1,4 @@
-Recorded flight on 2024-02-05-23-06-44
+Recorded flight on 2024-02-05-23-22-33
 This file will be overridden if executed again
 
 dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
@@ -10,6 +10,50 @@ LOG: Connected = True
 LOG: Offboard = False
 LOG: Drone meets requirements for arming without GPS.
 SUCCESS: Finished 'connect'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: arm
+LOG: Starting 'arm'
+LOG: Armming drone...
+SUCCESS: Drone arming complete!
+SUCCESS: Finished 'arm'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: disarm
+LOG: Starting 'disarm'
+LOG: Disarmming drone
+SUCCESS: Drone disarming complete!
+SUCCESS: Finished 'disarm'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: acceleration
+LOG: Starting 'acceleration'
+LOG: Armming drone...
+SUCCESS: Drone arming complete!
+LOG: Setting Acceleration NED setpoint...
+SUCCESS: Setpoint is set!
+LOG: Starting offboard mode...
+ERROR: Starting offboard mode failed with error code: COMMAND_DENIED
+ERROR: ['Traceback (most recent call last):\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 425, in main\n    await plan()\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 223, in start_offboard\n    raise e\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 214, in start_offboard\n    await drone.offboard.start()\n', '  File "/home/suave/myvenv/lib/python3.11/site-packages/mavsdk/offboard.py", line 1150, in start\n    raise OffboardError(result, "start()")\n', "mavsdk.offboard.OffboardError: COMMAND_DENIED: 'Command Denied'; origin: start(); params: ()\n"]
+ERROR: Failed flight 'acceleration'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: acclereation
+WARNING: Could not find  named 'acclereation'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: acceleration
+LOG: Starting 'acceleration'
+LOG: Armming drone...
+SUCCESS: Drone arming complete!
+LOG: Setting Acceleration NED setpoint...
+SUCCESS: Setpoint is set!
+LOG: Starting offboard mode...
+ERROR: Starting offboard mode failed with error code: COMMAND_DENIED
+ERROR: ['Traceback (most recent call last):\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 425, in main\n    await plan()\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 223, in start_offboard\n    raise e\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 214, in start_offboard\n    await drone.offboard.start()\n', '  File "/home/suave/myvenv/lib/python3.11/site-packages/mavsdk/offboard.py", line 1150, in start\n    raise OffboardError(result, "start()")\n', "mavsdk.offboard.OffboardError: COMMAND_DENIED: 'Command Denied'; origin: start(); params: ()\n"]
+ERROR: Failed flight 'acceleration'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: debug
+LOG: Starting 'debug'
+LOG: Connected = True
+LOG: Offboard = False
+LOG: Drone meets requirements for arming without GPS.
+SUCCESS: Finished 'debug'
 dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
 Select: thrust
 LOG: Starting 'thrust'
@@ -33,9 +77,252 @@ LOG: Disarmming drone
 SUCCESS: Drone disarming complete!
 SUCCESS: Finished 'thrust'
 dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
-Select: write
-LOG: Starting 'write'
-SUCCESS: Finished 'write'
+Select: acceleration
+LOG: Starting 'acceleration'
+LOG: Armming drone...
+SUCCESS: Drone arming complete!
+LOG: Setting Acceleration NED setpoint...
+SUCCESS: Setpoint is set!
+LOG: Starting offboard mode...
+LOG: Offboard.is_active = True
+SUCCESS: Start offboard complete!
+Enter north = 0
+Enter east = 0
+Enter down = -0.05
+LOG: Setting acceleration to AccelerationNed: [north_m_s2: 0.0, east_m_s2: 0.0, down_m_s2: -0.05]
+SUCCESS: Finished setting acceleration!
+LOG: Sleeping for 5 seconds...
+LOG: Awake!
+LOG: Disarmming drone
+SUCCESS: Drone disarming complete!
+SUCCESS: Finished 'acceleration'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: velocity_body
+LOG: Starting 'velocity_body'
+LOG: Armming drone...
+ERROR: ['Traceback (most recent call last):\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 425, in main\n    await plan()\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 196, in arm\n    await drone.action.arm()\n', '  File "/home/suave/myvenv/lib/python3.11/site-packages/mavsdk/action.py", line 320, in arm\n    raise ActionError(result, "arm()")\n', "mavsdk.action.ActionError: COMMAND_DENIED: 'Command Denied'; origin: arm(); params: ()\n"]
+ERROR: Failed flight 'velocity_body'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: arm
+LOG: Starting 'arm'
+LOG: Armming drone...
+ERROR: ['Traceback (most recent call last):\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 425, in main\n    await plan()\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 196, in arm\n    await drone.action.arm()\n', '  File "/home/suave/myvenv/lib/python3.11/site-packages/mavsdk/action.py", line 320, in arm\n    raise ActionError(result, "arm()")\n', "mavsdk.action.ActionError: COMMAND_DENIED: 'Command Denied'; origin: arm(); params: ()\n"]
+ERROR: Failed flight 'arm'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: arm
+LOG: Starting 'arm'
+LOG: Armming drone...
+ERROR: ['Traceback (most recent call last):\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 425, in main\n    await plan()\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 196, in arm\n    await drone.action.arm()\n', '  File "/home/suave/myvenv/lib/python3.11/site-packages/mavsdk/action.py", line 320, in arm\n    raise ActionError(result, "arm()")\n', "mavsdk.action.ActionError: COMMAND_DENIED: 'Command Denied'; origin: arm(); params: ()\n"]
+ERROR: Failed flight 'arm'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: debug
+LOG: Starting 'debug'
+LOG: Connected = True
+LOG: Offboard = False
+LOG: Drone meets requirements for arming without GPS.
+SUCCESS: Finished 'debug'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: disarm
+LOG: Starting 'disarm'
+LOG: Disarmming drone
+SUCCESS: Drone disarming complete!
+SUCCESS: Finished 'disarm'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: arm
+LOG: Starting 'arm'
+LOG: Armming drone...
+ERROR: ['Traceback (most recent call last):\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 425, in main\n    await plan()\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 196, in arm\n    await drone.action.arm()\n', '  File "/home/suave/myvenv/lib/python3.11/site-packages/mavsdk/action.py", line 320, in arm\n    raise ActionError(result, "arm()")\n', "mavsdk.action.ActionError: COMMAND_DENIED: 'Command Denied'; origin: arm(); params: ()\n"]
+ERROR: Failed flight 'arm'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: arm
+LOG: Starting 'arm'
+LOG: Armming drone...
+ERROR: ['Traceback (most recent call last):\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 425, in main\n    await plan()\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 196, in arm\n    await drone.action.arm()\n', '  File "/home/suave/myvenv/lib/python3.11/site-packages/mavsdk/action.py", line 320, in arm\n    raise ActionError(result, "arm()")\n', "mavsdk.action.ActionError: COMMAND_DENIED: 'Command Denied'; origin: arm(); params: ()\n"]
+ERROR: Failed flight 'arm'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: connect
+LOG: Starting 'connect'
+LOG: Connecting to address = serial:///dev/ttyUSB0:57600
+SUCCESS: Successfully connected to serial:///dev/ttyUSB0:57600!
+LOG: Connected = True
+LOG: Offboard = False
+LOG: Drone meets requirements for arming without GPS.
+SUCCESS: Finished 'connect'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: arm
+LOG: Starting 'arm'
+LOG: Armming drone...
+SUCCESS: Drone arming complete!
+SUCCESS: Finished 'arm'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: disarm
+LOG: Starting 'disarm'
+LOG: Disarmming drone
+SUCCESS: Drone disarming complete!
+SUCCESS: Finished 'disarm'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: velocity_body
+LOG: Starting 'velocity_body'
+LOG: Armming drone...
+SUCCESS: Drone arming complete!
+LOG: Setting Velocity Body setpoint...
+SUCCESS: Setpoint is set!
+LOG: Starting offboard mode...
+ERROR: Starting offboard mode failed with error code: COMMAND_DENIED
+ERROR: ['Traceback (most recent call last):\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 425, in main\n    await plan()\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 223, in start_offboard\n    raise e\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 214, in start_offboard\n    await drone.offboard.start()\n', '  File "/home/suave/myvenv/lib/python3.11/site-packages/mavsdk/offboard.py", line 1150, in start\n    raise OffboardError(result, "start()")\n', "mavsdk.offboard.OffboardError: COMMAND_DENIED: 'Command Denied'; origin: start(); params: ()\n"]
+ERROR: Failed flight 'velocity_body'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: debug
+LOG: Starting 'debug'
+LOG: Connected = True
+LOG: Offboard = False
+LOG: Drone meets requirements for arming without GPS.
+SUCCESS: Finished 'debug'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: disarm
+LOG: Starting 'disarm'
+LOG: Disarmming drone
+SUCCESS: Drone disarming complete!
+SUCCESS: Finished 'disarm'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: thrust
+LOG: Starting 'thrust'
+LOG: Armming drone...
+SUCCESS: Drone arming complete!
+LOG: Setting Attitude setpoint...
+SUCCESS: Setpoint is set!
+LOG: Starting offboard mode...
+LOG: Offboard.is_active = True
+SUCCESS: Start offboard complete!
+Enter thrust [0-1]: 0.01
+LOG: Setting thrust to 0.01
+SUCCESS: Finished setting thrust!
+LOG: Sleeping for 5 seconds...
+LOG: Awake!
+LOG: Setting Attitude setpoint...
+SUCCESS: Setpoint is set!
+LOG: Sleeping for 5 seconds...
+LOG: Awake!
+LOG: Disarmming drone
+SUCCESS: Drone disarming complete!
+SUCCESS: Finished 'thrust'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: thrust
+LOG: Starting 'thrust'
+LOG: Armming drone...
+SUCCESS: Drone arming complete!
+LOG: Setting Attitude setpoint...
+SUCCESS: Setpoint is set!
+LOG: Starting offboard mode...
+LOG: Offboard.is_active = True
+SUCCESS: Start offboard complete!
+Enter thrust [0-1]: 0.01
+LOG: Setting thrust to 0.01
+SUCCESS: Finished setting thrust!
+LOG: Sleeping for 5 seconds...
+LOG: Awake!
+LOG: Setting Attitude setpoint...
+SUCCESS: Setpoint is set!
+LOG: Sleeping for 5 seconds...
+LOG: Awake!
+LOG: Disarmming drone
+SUCCESS: Drone disarming complete!
+SUCCESS: Finished 'thrust'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: velocity_ned
+LOG: Starting 'velocity_ned'
+LOG: Armming drone...
+SUCCESS: Drone arming complete!
+LOG: Setting Velocity NED setpoint...
+SUCCESS: Setpoint is set!
+LOG: Starting offboard mode...
+LOG: Offboard.is_active = True
+SUCCESS: Start offboard complete!
+Enter north = 0
+Enter east = 0
+Enter down = -0.5
+Enter yaw = 0
+LOG: Setting velocity to VelocityNedYaw: [north_m_s: 0.0, east_m_s: 0.0, down_m_s: -0.5, yaw_deg: 0.0]
+SUCCESS: Finished setting velocity!
+LOG: Sleeping for 5 seconds...
+LOG: Awake!
+LOG: Disarmming drone
+SUCCESS: Drone disarming complete!
+SUCCESS: Finished 'velocity_ned'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: velocity
+WARNING: Could not find  named 'velocity'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: velocity_ned
+LOG: Starting 'velocity_ned'
+LOG: Armming drone...
+ERROR: ['Traceback (most recent call last):\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 425, in main\n    await plan()\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 196, in arm\n    await drone.action.arm()\n', '  File "/home/suave/myvenv/lib/python3.11/site-packages/mavsdk/action.py", line 320, in arm\n    raise ActionError(result, "arm()")\n', "mavsdk.action.ActionError: COMMAND_DENIED: 'Command Denied'; origin: arm(); params: ()\n"]
+ERROR: Failed flight 'velocity_ned'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: arm
+LOG: Starting 'arm'
+LOG: Armming drone...
+ERROR: ['Traceback (most recent call last):\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 425, in main\n    await plan()\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 196, in arm\n    await drone.action.arm()\n', '  File "/home/suave/myvenv/lib/python3.11/site-packages/mavsdk/action.py", line 320, in arm\n    raise ActionError(result, "arm()")\n', "mavsdk.action.ActionError: COMMAND_DENIED: 'Command Denied'; origin: arm(); params: ()\n"]
+ERROR: Failed flight 'arm'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: disarm
+LOG: Starting 'disarm'
+LOG: Disarmming drone
+SUCCESS: Drone disarming complete!
+SUCCESS: Finished 'disarm'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: arm
+LOG: Starting 'arm'
+LOG: Armming drone...
+ERROR: ['Traceback (most recent call last):\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 425, in main\n    await plan()\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 196, in arm\n    await drone.action.arm()\n', '  File "/home/suave/myvenv/lib/python3.11/site-packages/mavsdk/action.py", line 320, in arm\n    raise ActionError(result, "arm()")\n', "mavsdk.action.ActionError: COMMAND_DENIED: 'Command Denied'; origin: arm(); params: ()\n"]
+ERROR: Failed flight 'arm'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: connect
+LOG: Starting 'connect'
+LOG: Connecting to address = serial:///dev/ttyUSB0:57600
+SUCCESS: Successfully connected to serial:///dev/ttyUSB0:57600!
+LOG: Connected = True
+LOG: Offboard = False
+LOG: Drone meets requirements for arming without GPS.
+SUCCESS: Finished 'connect'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: arm
+LOG: Starting 'arm'
+LOG: Armming drone...
+ERROR: ['Traceback (most recent call last):\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 425, in main\n    await plan()\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 196, in arm\n    await drone.action.arm()\n', '  File "/home/suave/myvenv/lib/python3.11/site-packages/mavsdk/action.py", line 320, in arm\n    raise ActionError(result, "arm()")\n', "mavsdk.action.ActionError: COMMAND_DENIED: 'Command Denied'; origin: arm(); params: ()\n"]
+ERROR: Failed flight 'arm'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: arm
+LOG: Starting 'arm'
+LOG: Armming drone...
+SUCCESS: Drone arming complete!
+SUCCESS: Finished 'arm'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: diarm
+WARNING: Could not find  named 'diarm'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: disarm
+LOG: Starting 'disarm'
+LOG: Disarmming drone
+SUCCESS: Drone disarming complete!
+SUCCESS: Finished 'disarm'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: velocity_ned
+LOG: Starting 'velocity_ned'
+LOG: Armming drone...
+SUCCESS: Drone arming complete!
+LOG: Setting Velocity NED setpoint...
+SUCCESS: Setpoint is set!
+LOG: Starting offboard mode...
+ERROR: Starting offboard mode failed with error code: COMMAND_DENIED
+ERROR: ['Traceback (most recent call last):\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 425, in main\n    await plan()\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 223, in start_offboard\n    raise e\n', '  File "/home/suave/suave_flight_plans/control_test.py", line 214, in start_offboard\n    await drone.offboard.start()\n', '  File "/home/suave/myvenv/lib/python3.11/site-packages/mavsdk/offboard.py", line 1150, in start\n    raise OffboardError(result, "start()")\n', "mavsdk.offboard.OffboardError: COMMAND_DENIED: 'Command Denied'; origin: start(); params: ()\n"]
+ERROR: Failed flight 'velocity_ned'
+dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
+Select: disarm
+LOG: Starting 'disarm'
+LOG: Disarmming drone
+SUCCESS: Drone disarming complete!
+SUCCESS: Finished 'disarm'
 dict_keys(['connect', 'arm', 'disarm', 'offboard', 'thrust', 'upnorth', 'attitude', 'velocity_ned', 'velocity_body', 'position', 'acceleration', 'posvel', 'write', 'debug', 'edit', 'exit'])
 Select: exit
 LOG: Starting 'exit'
